@@ -7,15 +7,10 @@
 */
 
 export type AdminPage =
-
   | "dashboard"
-
   | "products"
-
+  | "categories"
   | "orders"
-
-  | "customers"
-
+  | "users"
   | "analytics"
-
   | "settings";

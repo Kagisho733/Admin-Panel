@@ -1,4 +1,13 @@
-export interface Customer {
+export type UserRole =
+  | "customer"
+  | "admin"
+  | "manager"
+  | "seller"
+  | "supplier"
+  | "driver"
+  | "support";
+
+export interface User {
 
   id?: string;
 
@@ -11,6 +20,8 @@ export interface Customer {
   phone: string;
 
   avatar?: string;
+
+  role: UserRole;
 
   totalOrders: number;
 

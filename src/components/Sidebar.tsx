@@ -8,9 +8,9 @@ interface Props {
   setPage: React.Dispatch<React.SetStateAction<AdminPage>>;
 }
 
-export default function Sidebar({ 
+export default function Sidebar({
   page,
-   setPage 
+  setPage
 }: Props) {
 
 
@@ -18,19 +18,19 @@ export default function Sidebar({
 
   const pageMap: Record<string, AdminPage> = {
 
-  Dashboard: "dashboard",
+    Dashboard: "dashboard",
 
-  Products: "products",
+    Products: "products",
 
-  Orders: "orders",
+    Orders: "orders",
 
-  Customers: "customers",
+    Users: "users",
 
-  Analytics: "analytics",
+    Analytics: "analytics",
 
-  Settings: "settings",
+    Settings: "settings",
 
-};
+  };
 
   return (
     <>
@@ -55,7 +55,7 @@ export default function Sidebar({
       {/* Sidebar */}
 
       <aside
-  className={`
+        className={`
     fixed
     top-0
     left-0
@@ -68,15 +68,14 @@ export default function Sidebar({
     duration-300
     z-40
 
-    ${
-      mobileOpen
-        ? "translate-x-0"
-        : "-translate-x-full lg:translate-x-0"
-    }
+    ${mobileOpen
+            ? "translate-x-0"
+            : "-translate-x-full lg:translate-x-0"
+          }
   `}
->
+      >
 
-        
+
         {/* Logo */}
 
         <div className="p-6 border-b border-slate-700">
@@ -106,11 +105,11 @@ export default function Sidebar({
             return (
               <button
                 key={item.name}
-              onClick={() => {
+                onClick={() => {
 
-                setPage(pageMap[item.name]);
+                  setPage(pageMap[item.name]);
 
-                setMobileOpen(false);
+                  setMobileOpen(false);
 
                 }}
                 className={`

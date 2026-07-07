@@ -11,7 +11,7 @@ import ProductsPage from "./pages/products/ProductsPage";
 import type { AdminPage } from "./types/AdminPage";
 import { Toaster } from "react-hot-toast";
 import OrdersPage from "./pages/orders/OrdersPage";
-import CustomersPage from "./pages/customers/CustomersPage";
+import UsersPage from "./pages/users/UsersPage";
 
 export default function App() {
 
@@ -32,8 +32,8 @@ export default function App() {
          return <OrdersPage />;
         
 
-      case "customers":
-        <CustomersPage />
+      case "users":
+      return <UsersPage />;
 
       case "analytics":
         return (
