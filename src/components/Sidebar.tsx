@@ -22,6 +22,8 @@ export default function Sidebar({
 
     Products: "products",
 
+    Categories: "categories",
+
     Orders: "orders",
 
     Users: "users",

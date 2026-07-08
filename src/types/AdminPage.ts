@@ -9,8 +9,8 @@
 export type AdminPage =
   | "dashboard"
   | "products"
-  | "categories"
   | "orders"
   | "users"
+  | "categories"
   | "analytics"
   | "settings";

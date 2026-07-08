@@ -12,6 +12,7 @@ import type { AdminPage } from "./types/AdminPage";
 import { Toaster } from "react-hot-toast";
 import OrdersPage from "./pages/orders/OrdersPage";
 import UsersPage from "./pages/users/UsersPage";
+import CategoriesPage from "./pages/categories/CategoriesPage";
 
 export default function App() {
 
@@ -28,12 +29,15 @@ export default function App() {
       case "products":
         return <ProductsPage />;
 
+      case "categories":
+        return <CategoriesPage />;
+
       case "orders":
-         return <OrdersPage />;
-        
+        return <OrdersPage />;
+
 
       case "users":
-      return <UsersPage />;
+        return <UsersPage />;
 
       case "analytics":
         return (
@@ -56,35 +60,35 @@ export default function App() {
 
   }
 
-return (
+  return (
 
-  <ThemeProvider>
+    <ThemeProvider>
 
-    <Toaster
-      position="top-right"
-      reverseOrder={false}
-      gutter={12}
-      toastOptions={{
-        duration: 4000,
-        style: {
-          borderRadius: "12px",
-          background: "#1e293b",
-          color: "#fff",
-        },
-      }}
-    />
+      <Toaster
+        position="top-right"
+        reverseOrder={false}
+        gutter={12}
+        toastOptions={{
+          duration: 4000,
+          style: {
+            borderRadius: "12px",
+            background: "#1e293b",
+            color: "#fff",
+          },
+        }}
+      />
 
-    <AdminLayout
-      page={page}
-      setPage={setPage}
-    >
+      <AdminLayout
+        page={page}
+        setPage={setPage}
+      >
 
-      {renderPage()}
+        {renderPage()}
 
-    </AdminLayout>
+      </AdminLayout>
 
-  </ThemeProvider>
+    </ThemeProvider>
 
-);
+  );
 
 }
