@@ -19,7 +19,7 @@ export interface Product {
 
   sku: string;
 
-  barcode: string;
+  barcode: string;  
 
   price: number;
 

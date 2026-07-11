@@ -13,6 +13,7 @@ import { Toaster } from "react-hot-toast";
 import OrdersPage from "./pages/orders/OrdersPage";
 import UsersPage from "./pages/users/UsersPage";
 import CategoriesPage from "./pages/categories/CategoriesPage";
+import AnalyticsPage from "./pages/analytics/AnalyticsPage";
 
 export default function App() {
 
@@ -40,11 +41,7 @@ export default function App() {
         return <UsersPage />;
 
       case "analytics":
-        return (
-          <div className="text-3xl font-bold">
-            Analytics Coming Soon
-          </div>
-        );
+        return <AnalyticsPage />;
 
       case "settings":
         return (
