@@ -1,36 +1,29 @@
 import { useState } from "react";
 import { FaBars } from "react-icons/fa";
 import { navigation } from "../data/navigation";
-import type { AdminPage } from "../types/AdminPage";
+import {
+  useNavigate,
+  useLocation,
+} from "react-router-dom";
+import { useAuth } from "../hooks/useAuth";
+import toast from "react-hot-toast";
 
-interface Props {
-  page: AdminPage;
-  setPage: React.Dispatch<React.SetStateAction<AdminPage>>;
-}
-
-export default function Sidebar({
-  page,
-  setPage
-}: Props) {
-
+export default function Sidebar() {
 
   const [mobileOpen, setMobileOpen] = useState(false);
 
-  const pageMap: Record<string, AdminPage> = {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const { user, logout } = useAuth();
 
-    Dashboard: "dashboard",
-
-    Products: "products",
-
-    Categories: "categories",
-
-    Orders: "orders",
-
-    Users: "users",
-
-    Analytics: "analytics",
-
-    Settings: "settings",
+  const routeMap: Record<string, string> = {
+    Dashboard: "/dashboard",
+    Products: "/products",
+    Categories: "/categories",
+    Orders: "/orders",
+    Users: "/users",
+    Analytics: "/analytics",
+    Settings: "/settings",
 
   };
 
@@ -58,25 +51,24 @@ export default function Sidebar({
 
       <aside
         className={`
-    fixed
-    top-0
-    left-0
-    h-screen
-    w-72
-    bg-slate-900
-    text-white
-    transform
-    transition-transform
-    duration-300
-    z-40
+          fixed
+          top-0
+          left-0
+          h-screen
+          w-72
+          bg-slate-900
+          text-white
+          transform
+          transition-transform
+          duration-300
+          z-40
 
-    ${mobileOpen
+          ${mobileOpen
             ? "translate-x-0"
             : "-translate-x-full lg:translate-x-0"
           }
-  `}
+        `}
       >
-
 
         {/* Logo */}
 
@@ -100,56 +92,77 @@ export default function Sidebar({
 
         <nav className="p-4">
 
-          {navigation.map((item) => {
+          {navigation
+            .filter((item) =>
+              user?.role
+                ? item.allowedRoles.includes(user.role)
+                : false
+            )
+            .map((item) => {
 
-            const Icon = item.icon;
+              const Icon = item.icon;
 
-            return (
-              <button
-                key={item.name}
-                onClick={() => {
+              return (
 
-                  setPage(pageMap[item.name]);
+                <button
+                  key={item.name}
+                  onClick={async () => {
 
-                  setMobileOpen(false);
+                    if (item.name === "Logout") {
 
-                }}
-                className={`
+                      const confirmed = window.confirm(
+                        "Are you sure you want to log out?"
+                      );
 
+                      if (!confirmed) {
+                        return;
+                      }
+
+                      await logout();
+
+                      toast.success("Logged out successfully.");
+
+                      navigate("/login", { replace: true });
+
+                      return;
+
+                    }
+
+                    navigate(routeMap[item.name]);
+
+                    setMobileOpen(false);
+
+                  }}
+                  className={`
                   flex
                   items-center
                   gap-4
-
                   w-full
-
                   p-4
-
                   rounded-xl
-
                   mb-2
-
                   transition
 
-                  ${page === pageMap[item.name]
-                    ? "bg-blue-600"
-                    : "hover:bg-slate-800"
-                  }
-
+                  ${location.pathname === routeMap[item.name]
+                      ? "bg-blue-600"
+                      : "hover:bg-slate-800"
+                    }
                 `}
-              >
-                <Icon size={20} />
+                >
 
-                {item.name}
+                  <Icon size={20} />
 
-              </button>
-            );
+                  {item.name}
 
-          })}
+                </button>
+
+              );
+
+            })}
 
         </nav>
 
       </aside>
     </>
   );
-
 }

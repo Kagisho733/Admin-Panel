@@ -1,61 +1,13 @@
-import { useState } from "react";
 
+
+import AppRoutes from "./routes/AppRoutes";
 import { ThemeProvider } from "./context/ThemeContext";
-
-import AdminLayout from "./layouts/AdminLayout";
-
-import Dashboard from "./pages/Dashboard";
-
-import ProductsPage from "./pages/products/ProductsPage";
-
-import type { AdminPage } from "./types/AdminPage";
 import { Toaster } from "react-hot-toast";
-import OrdersPage from "./pages/orders/OrdersPage";
-import UsersPage from "./pages/users/UsersPage";
-import CategoriesPage from "./pages/categories/CategoriesPage";
-import AnalyticsPage from "./pages/analytics/AnalyticsPage";
+
+
 
 export default function App() {
 
-  const [page, setPage] =
-    useState<AdminPage>("dashboard");
-
-  function renderPage() {
-
-    switch (page) {
-
-      case "dashboard":
-        return <Dashboard />;
-
-      case "products":
-        return <ProductsPage />;
-
-      case "categories":
-        return <CategoriesPage />;
-
-      case "orders":
-        return <OrdersPage />;
-
-
-      case "users":
-        return <UsersPage />;
-
-      case "analytics":
-        return <AnalyticsPage />;
-
-      case "settings":
-        return (
-          <div className="text-3xl font-bold">
-            Settings Coming Soon
-          </div>
-        );
-
-      default:
-        return <Dashboard />;
-
-    }
-
-  }
 
   return (
 
@@ -75,14 +27,8 @@ export default function App() {
         }}
       />
 
-      <AdminLayout
-        page={page}
-        setPage={setPage}
-      >
 
-        {renderPage()}
-
-      </AdminLayout>
+    <AppRoutes />
 
     </ThemeProvider>
 
